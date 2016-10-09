@@ -35,3 +35,6 @@
 
 - name: Install kernel module i2c_dev
   modprobe: name=i2c_dev state=present
+
+- name: Add kernel modules to /etc/modules
+  template: src=modules.j2 dest=/etc/modules owner=root group=root mode=0644
