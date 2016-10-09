@@ -1,0 +1,29 @@
+- name: Create user sensor for running the software and add it to the required groups so it can read gpio and i2c
+  user: name=sensor groups=i2c,gpio
+
+- name: Create sensor software directory
+  file: path=/data/sensor state=directory mode=0700 owner=sensor
+
+- name: Create sensor app directories
+  file: path=/data/sensor/app state=directory mode=0700 owner=sensor
+
+- name: Create sensor app directories
+  file: path=/data/sensor/app/sensor state=directory mode=0700 owner=sensor
+
+- name: Create sensor app directories
+  file: path=/data/sensor/app/scripts state=directory mode=0700 owner=sensor
+
+- name: Upload sensor file(s)
+  copy: src={{ item }} dest=/data/sensor/app mode=0700 owner=sensor
+  with_fileglob:
+    - ../app/main.py
+
+- name: Upload sensor file(s)
+  copy: src={{ item }} dest=/data/sensor/app/sensor mode=0700 owner=sensor
+  with_fileglob:
+    - ../app/sensor/*.py
+
+- name: Upload helper script
+  copy: src={{ item }} dest=/root mode=0700 owner=sensor
+  with_fileglob:
+    - ../app/scripts/check-sensor-address.sh

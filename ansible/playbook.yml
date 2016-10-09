@@ -1,0 +1,4 @@
+- hosts: temp-sensor
+  roles:
+    - os
+    - software
