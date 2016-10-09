@@ -9,6 +9,11 @@
     - python-rpi.gpio
     - python-smbus
 
+- name: Install custom software
+  apt: name=$item state=installed
+  with_items:
+    - telnet
+
 - name: Modify boot configuration
   template: src=config.txt.j2 dest=/boot/config.txt owner=root group=root mode=0755
   register: bootconfig

@@ -1,3 +1,6 @@
+- name: Install postgres python connection library
+  apt: name=python-psycopg2 state=installed
+
 - name: Create user sensor for running the software and add it to the required groups so it can read gpio and i2c
   user: name=sensor groups=i2c,gpio
 
