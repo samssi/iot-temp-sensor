@@ -1,4 +1,5 @@
 - hosts: temp-sensor
   roles:
     - os
+    - cron
     - software

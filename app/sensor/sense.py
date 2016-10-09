@@ -8,9 +8,7 @@ digital_output = 17
 gpio.setmode(gpio.BCM)
 
 def setup():
-    #       ADC.Setup(Address)  # Check it by sudo i2cdetect -y -1
-    #       ADC.read(channal)       # Channal range from 0 to 3
-    #       ADC.write(Value)        # Value range from 0 to 255
+    # Setup channel address here. Channel address can be found as root running the check-sensor-address.sh
     adc.setup(0x48)
     gpio.setup(digital_output, gpio.IN)
 
@@ -20,9 +18,7 @@ def to_celcius(reading):
     temperature = 1 / (((math.log(rt / 10000)) / 3950) + (1 / (273.15+25)))
     temperature = temperature - 273.15
     db.insertTemperature(temperature)
-    print("temperature {0}".format(temperature))
 
-def loop():
+def read():
     reading = adc.read(0)
     to_celcius(reading)
-    time.sleep(30)
