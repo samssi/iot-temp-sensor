@@ -1,1 +1,1 @@
-docker build -t iot/led .
+docker build -t iot/tempsensor .

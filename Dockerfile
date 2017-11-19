@@ -1,6 +1,7 @@
-FROM resin/rpi-raspbian:jessie
+FROM resin/rpi-raspbian:latest
 
-RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get update && \
+    apt-get -qy install curl ca-certificates
 
 RUN apt-get install -y \
     build-essential \
