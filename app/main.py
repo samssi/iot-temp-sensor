@@ -2,6 +2,7 @@ import PCF8581 as adc
 import RPi.GPIO as gpio
 import time
 import math
+from flask import Flask, request
 
 digital_output = 17
 gpio.setmode(gpio.BCM)
@@ -17,10 +18,16 @@ def to_celcius(reading):
     temperature = temperature - 273.15
     print temperature
 
-def read():
+def readTemp():
     reading = adc.read(0)
-    to_celcius(reading)
+    return to_celcius(reading)
 
-if __name__ == '__main__':
-    setup()
-    read()
+#if __name__ == '__main__':
+#    setup()
+#    read()
+
+setup()
+
+@app.route('/api/temperature', methods=['GET'])
+def getTemperature():
+    return readTemp()
