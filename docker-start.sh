@@ -1,1 +1,1 @@
-docker run -d -p 5000:5000 --device /dev/gpiomem --device /dev/i2c-1 iot/tempsensor
+docker run -d -p 5000:5000 --net iot-nw --ip 172.18.0.20 --device /dev/gpiomem --device /dev/i2c-1 iot/tempsensor
